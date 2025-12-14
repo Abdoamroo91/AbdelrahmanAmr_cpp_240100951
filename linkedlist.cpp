@@ -126,8 +126,7 @@ public:
         current->next = NULL;
     }
 
-    void deleteAtPos(int pos)
-    {
+    void deleteAtPos(int pos){
         if (!head)
             return;
         if (pos == 1)
@@ -148,6 +147,29 @@ public:
         current->next = current->next->next;
         delete temp;
     }
+    void concatenate(Node* head2){
+        if (!head){
+            head = head2;
+            return;
+        }
+        Node* temp = head;
+        while (temp->next != NULL)
+            temp = temp->next;
+        temp->next = head2;
+    }
+    void concatenate(Node* head2){
+    if (!head){
+        head = head2;
+        return;
+    }
+
+    Node* temp = head;
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    temp->next = head2;
+}
+
 };
 
 int main()
