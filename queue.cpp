@@ -1,67 +1,69 @@
-#include <iostream>
-
+#include <iostream>;
 using namespace std;
 
-class Stack {
-    static const int SIZE = 6;
+class queue{
     public:
-    int top;
-    int arr[SIZE];
-    Stack() {
-        top = -1;
+    int head;
+    int tail;
+    int size;
+    int *arr;
+    int counter;
+    queue(int s){
+        arr = new int[s];
+        this->size = s;
+        head = 0;
+        tail = 0;
+        counter = 0;
     }
-    void push(int num) {
-        if (top == SIZE - 1) {
-            cout << "Full can not push" << endl;
+    void enqueue(int num){
+        if(isFull()){
+            cout << "The queue is full" <<endl;
         }else{
-            arr[++top] = num;
-            cout << "Pushed: " << num << endl;
+            if(tail == size){
+                tail = 0;
+            }
+            arr[tail++] = num;
+            cout << "added to queue "<< num <<endl;
+            counter++;
+            
         }
-        
     }
-    int pop() {
-        if (top == -1) {
-            cout << "Empty can not pop" << endl;
+    int dequeue(){
+        if(isEmpty()){
+            cout << "The queue is empty" <<endl;
             return -1;
         }else{
-            int x = arr[top--];
-            // delete(arr[x + 1]);
-            cout << "Poped: " << x << endl;
-            return x;
+            if(head == size){
+                head = 0;
+            }
+            int temp = arr[head++];
+            counter--;
+            cout << "deleted to queue "<< temp <<endl;
+            return temp;
+            
         }
     }
-    int topValue() {
-        if (top == -1) {
-            return -1;
-        }else{
-            cout << "The top value is: " << arr[top] << endl;
-            return arr[top];
-        }
+    bool isFull(){
+        return counter == size;
+    }
+    bool isEmpty(){
+        return counter == 0;
     }
 };
 
-class Queue {
-private:
-    
-public:
-    
-};
 
-int main() {
-    Stack ss;
-    ss.push(10);
-    ss.push(20);
-    ss.topValue();
-    ss.pop();
-    ss.pop();
-    ss.pop();
-    ss.push(30);
-    ss.push(40);
-    ss.push(50);
-    ss.push(60);
-    ss.push(70);
-    ss.push(80);
-    ss.push(90);
-    ss.topValue();
+int main(){
+    queue myFirstQueue(3);
+    myFirstQueue.enqueue(10);
+    myFirstQueue.enqueue(20);
+    myFirstQueue.enqueue(30);
+    myFirstQueue.enqueue(40);
+    myFirstQueue.dequeue();
+    myFirstQueue.dequeue();
+    myFirstQueue.dequeue();
+    myFirstQueue.enqueue(10);
+    // myFirstQueue.enqueue(20);
+    // myFirstQueue.enqueue(30);
+    // myFirstQueue.enqueue(40);
     return 0;
 }
